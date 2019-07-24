@@ -1,0 +1,25 @@
+<h2>News Manager</h2>
+<br>
+<button class="btn btn-primary" (click)="onOpenAddNewsDialog()">Add News</button>
+<br><br>
+<table class="table table-striped flex-column mx-auto">
+    <thead class="thead-dark">
+        <th scope="col">#</th>
+        <th scope="col">Author</th>
+        <th scope="col">Title</th>
+        <th scope="col">Action</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let news of listNews">
+            <th scope="row"> {{news.id}} </th>
+            <td>{{news.author.fullName}}</td>
+            <td>{{news.title}}</td>
+            <td>
+                <div class="btn-group mx-auto" style="margin-right: 0;">
+                    <button class="btn btn-primary btn-sm" (click)="onOpenNewsDetailDialog(news)">Detail</button>
+                    <button class="btn btn-secondary btn-sm" (click)="onDelete(news)">Delete</button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

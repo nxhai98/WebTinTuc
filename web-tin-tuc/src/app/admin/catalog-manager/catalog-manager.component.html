@@ -1,0 +1,29 @@
+<h2>Catalog Manager</h2>
+<br>
+<button class="btn btn-primary" (click)="openAddDialog()">Add catalog</button>
+<br>
+<br>
+
+<table class="table table-striped flex-column mx-auto">
+    <thead class="thead-dark">
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">ParentID</th>
+        <th scope="col">Action</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let catalog of listCatalog">
+            <th scope="row">{{catalog.id}}</th>
+            <td>{{catalog.name}}</td>
+            <td>{{catalog.description}}</td>
+            <td>{{catalog.parentId}}</td>
+            <td>
+                <div class="btn-group">
+                    <button class="btn btn-sm btn-primary" (click)="openDetailDialog(catalog)">Detail</button>
+                    <button class="btn btn-sm btn-danger" (click)="onDelete(catalog)">Delete</button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

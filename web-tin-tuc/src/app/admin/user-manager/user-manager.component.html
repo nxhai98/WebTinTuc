@@ -1,0 +1,36 @@
+<div>
+    <button class="btn btn-primary" (click)="openAddDialog()">Add new User</button>
+    <br><br>
+    <h2>List User:</h2>
+    <table class="table table-striped flex-column mx-auto">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">User Name</th>
+                <th scope="col">Role</th>
+                <th scope="col">Email</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of listUsers">
+                <th scope="row">{{user.id}}</th>
+                <td>{{user.userName}}</td>
+                <td>{{user.role}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.fullName}}</td>
+                <td>{{user.gender}}</td>
+                <td>
+                    <div class="btn-group mx-auto">
+                        <button class="btn btn-primary btn-sm" (click)="openEditDialog(user)">Edit</button>
+                        <button class="btn btn-secondary btn-sm" (click)="removeUser(user)">Remove</button>
+                    </div>
+
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
