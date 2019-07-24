@@ -12,7 +12,7 @@
     export class CatalogDetailComponent implements OnInit {
 
         detailForm: FormGroup;
-        listCatalog: Catalog[];
+        listCatalog;
         constructor(
             private formBuilder: FormBuilder,
             private adminSevice: AdminService,
@@ -21,7 +21,9 @@
         ) { }
 
         ngOnInit() {
-            this.listCatalog = this.adminSevice.getListCatalog();
+            this.adminSevice.getListCatalog().subscribe(data=>{
+                this.listCatalog = data;
+            });
             this.detailForm = this.formBuilder.group({
                 name: [this.data.name, Validators.required],
                 description: [this.data.description, Validators.required],

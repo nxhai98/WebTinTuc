@@ -3,8 +3,6 @@
     import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
     import {AdminService} from '../_services/admin.service';
     import { News } from 'src/app/_models/News';
-    import { Catalog } from 'src/app/_models/Catalog';
-
 
     @Component({
         selector: 'app-news-detail',
@@ -14,24 +12,31 @@
     export class NewsDetailComponent implements OnInit {
 
         detailForm: FormGroup;
-        news: News;
-        catalogList: Catalog[];
+        catalogList;
         constructor(
             private formBuilder: FormBuilder,
             private adminSevice: AdminService,
             public matdialogRef: MatDialogRef<NewsDetailComponent>,
-            @Inject(MAT_DIALOG_DATA) public data: News,
-        ) { }
+            @Inject(MAT_DIALOG_DATA) public data: any,
+        ) { 
+                           
+        }
+
 
         ngOnInit() {
-            this.catalogList = this.adminSevice.getListCatalog();
+            console.log(this.data);
+            
+            this.adminSevice.getListCatalog().subscribe(catalog => {
+                this.catalogList = catalog;
+            });
             this.detailForm = this.formBuilder.group({
                 title: [this.data.title, Validators.required],
-                author: [this.data.author.fullName, Validators.required],
+                author: [this.data.author, Validators.required],
                 catalogId: [this.data.catalogId, Validators.required],
-                description: [this.data.description? this.data.description: ''],
-                content: [this.data.content]
+                description: [this.data.description],
+                content: [this.data.content],
             });
+            
         }
 
         get f(){

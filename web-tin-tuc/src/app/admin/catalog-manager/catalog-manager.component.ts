@@ -34,7 +34,17 @@ import { CatalogDetailComponent } from '../catalog-detail/catalog-detail.compone
             const catalogRef = this.dialog.open(CatalogAddComponent, dialogConfig);
 
             catalogRef.afterClosed().subscribe(result =>{
-
+                if(result){
+                    if(result.parentId == '-1'){
+                        result.parentId = null;
+                    }
+                    this.adminService.addCatalog(result).subscribe(data => {
+                        this.adminService.getListCatalog().subscribe(list =>{
+                            this.listCatalog = list;
+                        })
+                    })
+                }
+                
             })
         }
 
@@ -47,12 +57,25 @@ import { CatalogDetailComponent } from '../catalog-detail/catalog-detail.compone
 
             const catalogRef = this.dialog.open(CatalogDetailComponent,dialogConfig);
 
-            catalogRef.afterClosed().subscribe(result => {})
+            catalogRef.afterClosed().subscribe(result => {
+                if(result){
+                    this.adminService.updateCatalog(catalog.id, result).subscribe(data=>{
+                    this.adminService.getListCatalog().subscribe(list=>{
+                        this.listCatalog = list;
+                        })
+                    })
+                }
+                
+            })
         }
 
         onDelete(catalog: Catalog){
             if(confirm("Are you sure to delete catalog: " + catalog.name)){
-                this.adminService.removeCatalog(catalog.id);
+                this.adminService.removeCatalog(catalog.id).subscribe(data =>{
+                    this.adminService.getListCatalog().subscribe(list => {
+                        this.listCatalog = list;
+                    })
+                });
             }
         }
 

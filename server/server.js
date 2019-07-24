@@ -6,15 +6,24 @@ const bodyParser = require('body-parser');
 const errorHandle = require('./_helpers/error-handles');
 
 const Catalogs = require('./models/Catalog');
-Catalogs.createTable();
+const News = require('./models/News');
+const Comment = require('./models/Comment');
+const Illustration = require('./models/Illustration');
 
+
+News.createTable();
+Catalogs.createTable();
+Illustration.createTable();
+Comment.createTable();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({ origin: '*' }));
 
 
 app.use('/', require('./controller/user-controler'));
 app.use('/admin/', require('./controller/catalog-controller'));
+app.use('/news/', require('./controller/news-controller'));
+app.use('/imgs/', require('./controller/img-controller'));
 app.use(errorHandle);
 
 app.listen(3000, function() {

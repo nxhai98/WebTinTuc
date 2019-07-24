@@ -14,7 +14,7 @@ import { user } from 'src/app/_models/User';
     export class AddNewsComponent implements OnInit {
 
         addForm: FormGroup;
-        catalogList: Catalog[];
+        catalogList;
         listAuthor: user[];
         constructor(
             private formBuilder: FormBuilder,
@@ -24,7 +24,9 @@ import { user } from 'src/app/_models/User';
         ) { }
 
         ngOnInit() {
-            this.catalogList = this.adminSevice.getListCatalog();
+            this.adminSevice.getListCatalog().subscribe(data=>{
+                this.catalogList = data;
+            });
             this.listAuthor = this.adminSevice.getAuthor();
             this.addForm = this.formBuilder.group({
                 title: ['', Validators.required],
@@ -32,6 +34,7 @@ import { user } from 'src/app/_models/User';
                 catalogId: ['', Validators.required],
                 description: [''],
                 content: [''],
+                illustration: [''],
             });
         }
 

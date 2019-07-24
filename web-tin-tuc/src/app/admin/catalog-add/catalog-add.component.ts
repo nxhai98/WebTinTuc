@@ -10,7 +10,7 @@
         styleUrls: ['./catalog-add.component.css']
     })
     export class CatalogAddComponent implements OnInit {
-        listCatalog: Catalog[];
+        listCatalog;
         addForm: FormGroup;
         constructor(
             private formBuilder: FormBuilder,
@@ -20,7 +20,9 @@
         ) { }
 
         ngOnInit() {
-            this.listCatalog = this.adminSevice.getListCatalog();
+            this.adminSevice.getListCatalog().subscribe(data =>{
+                this.listCatalog = data;
+            });
             this.addForm = this.formBuilder.group({
                 name: ['', Validators.required],
                 description: ['', Validators.required],

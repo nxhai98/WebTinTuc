@@ -15,6 +15,7 @@
     export class AdminService {
         currentUser: user;
         url = 'http://127.0.0.1:3000/admin/';
+        urlForNews = 'http://127.0.0.1:3000/';
         httpOptions;
         constructor(
             private http: HttpClient,
@@ -70,44 +71,81 @@
 
         //News Manager
 
-        getListNews() :News[]{
-            return this.fakeNews;
+        getListNews(page){
+            return this.http.get(this.urlForNews + 'news/page/' + page).pipe(
+                tap(),
+                catchError(this.handleError)
+            )
         }
 
-        addNews(){
+        getNewsById(id){
+            return this.http.get(this.urlForNews + 'news/id/' + id).pipe(
+                tap(() => console.log('aaaa')),
+                catchError(this.handleError)
+            )
+        }
 
+        addNews(news, data){
+            return this.http.post(this.urlForNews + 'news/', {news, data}, this.httpOptions).pipe(
+                tap(),
+                catchError(this.handleError),
+            )
         }
 
         removeNews(id){
-
+            return this.http.delete(this.urlForNews + 'news/id/' + id, this.httpOptions).pipe(
+                tap(),
+                catchError(this.handleError)
+            )
         }
 
-        updateNews(){
-
+        updateNews(id, news){
+            return this.http.put(this.urlForNews+'news/id/'+ id, news, this.httpOptions).pipe(
+                tap(),
+                catchError(this.handleError)
+            )
         }
 
         //catalog mng
         getListCatalog(){
-            return this.http.get(this.url + 'catalogs', this.httpOptions).pipe(
+            return this.http.get(this.url + 'catalogs/', this.httpOptions).pipe(
                 tap(),
                 catchError(this.handleError)
             );
         }
         
-        addCatalog(){
+        addCatalog(catalog){
+            return this.http.post(this.url + 'catalogs/', catalog, this.httpOptions).pipe(
+                tap(),
+                catchError(this.handleError),
+            )
 
         }
 
         removeCatalog(id){
-
+            return this.http.delete(this.url + 'catalogs/' + id, this.httpOptions).pipe(
+                tap(),
+                catchError(this.handleError),
+            )
         }
 
-        updateCatalog(){
-
+        updateCatalog(id,catalog){
+            return this.http.put(this.url + 'catalogs/' + id, catalog, this.httpOptions).pipe(
+                tap(),
+                catchError(this.handleError),
+            )
         }
 
         getAuthor() :user[]{
             return this.dataFake;
+        }
+
+
+        addIllus(data){
+            return this.http.post(this.urlForNews + 'imgs/', data, this.httpOptions).pipe(
+                tap(),
+                catchError(this.handleError)
+            )
         }
 
 
