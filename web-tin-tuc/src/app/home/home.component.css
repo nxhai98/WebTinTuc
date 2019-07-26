@@ -3,10 +3,10 @@
 }
 
 .sidenav {
-    top: 56px;
+    top: 96px;
     display: block;
     position: fixed;
-    height: calc(100% - 56px);
+    height: calc(100% - 96px);
     overflow-x: hidden;
     overflow-y: auto;
 }

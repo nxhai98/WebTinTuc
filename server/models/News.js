@@ -3,7 +3,7 @@ var db = require('../Database/Dbconnection');
 
 var News = {
     createTable: function() {
-        db.query("SELECT COUNT(*) AS amount FROM information_schema.TABLES WHERE (TABLE_SCHEMA = 'demo2') AND (TABLE_NAME = 'News')", function(err, res) {
+        db.query("SELECT COUNT(*) AS amount FROM information_schema.TABLES WHERE (TABLE_SCHEMA = 'demo3') AND (TABLE_NAME = 'News')", function(err, res) {
             if (err) {
                 throw err;
             }
@@ -14,7 +14,7 @@ var News = {
                 console.log('table exists');
                 return;
             }
-            db.query("CREATE TABLE News (id INT AUTO_INCREMENT PRIMARY KEY, title VARCHAR(255), catalogId INT, description TEXT, author INT, createAt DATETIME, updateAt DATETIME, content TEXT, FOREIGN KEY (catalogId) REFERENCES Catalogs(id))", function(err, res) {
+            db.query("CREATE TABLE News (id INT AUTO_INCREMENT PRIMARY KEY, title TEXT, catalogId INT, description TEXT, author INT, createAt DATETIME, updateAt DATETIME, content TEXT, FOREIGN KEY (catalogId) REFERENCES Catalogs(id))", function(err, res) {
                 if (err) {
                     throw err;
                 }

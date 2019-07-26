@@ -1,4 +1,5 @@
     import { Component, OnInit } from '@angular/core';
+    import {AdminService} from '../_services/admin.service';
 
     @Component({
     selector: 'app-dash-board',
@@ -11,9 +12,21 @@
         isNewsManagerClick = false;
         isCatalogManagerClick = false;
 
-        constructor() { }
+        constructor(
+            private admin : AdminService,
+        ) { }
 
         ngOnInit() {
+        }
+
+        test(){
+            let user = {
+                name:'asda'
+            }
+            this.admin.addIllus('asdddd').subscribe(data=>{
+                console.log(data);
+                
+            })
         }
 
         accManageChoise(){

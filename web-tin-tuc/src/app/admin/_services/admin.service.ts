@@ -8,7 +8,7 @@
     import { News } from 'src/app/_models/News';
     import { Catalog } from 'src/app/_models/Catalog';
 
-
+    
     @Injectable({
     providedIn: 'root'
     })
@@ -23,7 +23,7 @@
         ) { 
             this.currentUser = authenticateService.currentUserValue;
             this.httpOptions = {
-                headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.currentUser.token })
+                headers: new HttpHeaders({ 'Authorization': 'Bearer ' + this.currentUser.token, 'Access-Control-Allow-Origin' : "*" })
               };
         }
         dataFake: user[] = [
@@ -85,8 +85,8 @@
             )
         }
 
-        addNews(news, data){
-            return this.http.post(this.urlForNews + 'news/', {news, data}, this.httpOptions).pipe(
+        addNews(news){
+            return this.http.post(this.urlForNews + 'news/', news, this.httpOptions).pipe(
                 tap(),
                 catchError(this.handleError),
             )
@@ -136,13 +136,24 @@
             )
         }
 
-        getAuthor() :user[]{
-            return this.dataFake;
+        getAuthor(){
+            return this.http.get(this.url + 'users/authors', this.httpOptions).pipe(
+                tap(),
+                catchError(this.handleError)
+            );
         }
 
 
         addIllus(data){
-            return this.http.post(this.urlForNews + 'imgs/', data, this.httpOptions).pipe(
+            console.log(data[0]);
+
+            const formData = new FormData();
+            
+            let httpOptions = {
+                headers: new HttpHeaders({'Authorization': 'Bearer ' + this.currentUser.token, 'Access-Control-Allow-Origin' : "*" }),
+                reportProgress: true,
+              };
+            return this.http.post('http://localhost:3000/admin/imgs/upload/', formData, httpOptions).pipe(
                 tap(),
                 catchError(this.handleError)
             )

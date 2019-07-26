@@ -61,7 +61,7 @@
         <div class="form-group row">
             <label for="illustration" class="col-sm-2 col-form-label">Illustration:</label>
             <div class="col-sm-10">
-                <input formControlName="illustration" type="file" id="customFile" class="btn btn-outline-dark">
+                <input ng2FileSelect [uploader]="uploader" type="file" id="customFile" class="btn btn-outline-dark">
             </div>
         </div>
 
@@ -70,5 +70,5 @@
 </mat-dialog-content>
 <div class="float-lg-right">
     <button class="btn btn-secondary" (click)="close()">Back</button>
-    <button class="btn btn-primary" (click)="onSubmit()">Add</button>
+    <button class="btn btn-primary" (click)="onSubmit()" [disabled]="!uploader.getNotUploadedItems().length">Add</button>
 </div>

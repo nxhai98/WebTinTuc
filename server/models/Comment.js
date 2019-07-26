@@ -4,7 +4,7 @@ var db = require('../Database/Dbconnection');
 var Comments = {
 
     createTable: function() {
-        db.query("SELECT COUNT(*) AS amount FROM information_schema.TABLES WHERE (TABLE_SCHEMA = 'demo2') AND (TABLE_NAME = 'Comments')", function(err, res) {
+        db.query("SELECT COUNT(*) AS amount FROM information_schema.TABLES WHERE (TABLE_SCHEMA = 'demo3') AND (TABLE_NAME = 'Comments')", function(err, res) {
             if (err) {
                 throw err;
             }

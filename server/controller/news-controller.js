@@ -27,13 +27,12 @@ route.get('/id/:id?', function(req, res, next) {
 });
 
 route.post('/', authorize(roles.admin), function(req, res, next) {
-    News.addNews(req.body, function(err, count) {
-        console.log(req.body);
-
+    News.addNews(req.body, function(err, results, fields) {
         if (err) {
             throw err;
         }
-        res.json(count);
+        console.log(results.insertId);
+        res.json(results.insertId);
 
 
     });

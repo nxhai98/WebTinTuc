@@ -5,6 +5,7 @@
 import { NewsDetailComponent } from '../news-detail/news-detail.component';
 import { AddNewsComponent } from '../add-news/add-news.component';
 import { delay } from 'q';
+import { HttpEventType } from '@angular/common/http';
 
     @Component({
         selector: 'app-news-manager',
@@ -56,10 +57,10 @@ import { delay } from 'q';
                         console.log(result);
 
                         console.log(formData);
-                        
+
 
                         result.illustration = formData;
-                                            
+
                         this.adminService.updateNews(data[0].id, result).subscribe(res =>{
                             this.adminService.getListNews(this.currentPage).subscribe(list => {
                                 this.listNews = list;
@@ -69,8 +70,6 @@ import { delay } from 'q';
                 })
 
             })
-            
-            
         }
 
         onOpenAddNewsDialog(){
@@ -80,17 +79,10 @@ import { delay } from 'q';
             dialogConfig.width = '1000px';
 
             const dialogRef = this.dialog.open(AddNewsComponent, dialogConfig);
-
             dialogRef.afterClosed().subscribe(result => {
                 if(result){
-                    let formData = new FormData();
+                    this.adminService.addNews(result).subscribe(data => {
                         
-                    formData.append('file', result.illustration);                    
-                    this.adminService.addNews(result, formData).subscribe(data => {
-                        this.adminService.addIllus(formData).subscribe(data =>{
-                            console.log('asd');
-                            
-                        })
                         this.currentPage = 1;
                         this.adminService.getListNews(this.currentPage).subscribe(list=>{
                             this.listNews = list;

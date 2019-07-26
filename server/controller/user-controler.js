@@ -13,6 +13,8 @@ route.post('/admin/users/', authorize(roles.admin), addUsers);
 route.delete('/admin/users/:id?', authorize(roles.admin), deleteUser);
 route.put('/admin/users/:id?', authorize(roles.admin), updateUser);
 
+route.get('/admin/users/authors/', authorize(roles.admin), getListAuthor)
+
 function authenticate(req, res, next) {
     Users.getUserByUserName(req.body.userName, function(err, resUser) {
         if (err) {
@@ -62,5 +64,14 @@ function updateUser(req, res, next) {
             throw err;
         }
         res.json(count);
+    })
+}
+
+function getListAuthor(req, res, next) {
+    Users.getAuthor(function(err, list) {
+        if (err) {
+            throw err;
+        }
+        res.json(list);
     })
 }

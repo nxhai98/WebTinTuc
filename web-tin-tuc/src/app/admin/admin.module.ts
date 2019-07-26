@@ -1,11 +1,12 @@
     import { NgModule } from '@angular/core';
     import { CommonModule } from '@angular/common';
     import {RouterModule} from '@angular/router';
-    import {ReactiveFormsModule} from '@angular/forms';
+    import {ReactiveFormsModule, FormsModule} from '@angular/forms';
     import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
     import {OverlayModule} from '@angular/cdk/overlay';
     import {HttpClientModule} from '@angular/common/http';
+    import {FileSelectDirective} from 'ng2-file-upload';
 
     import { NewsManagerComponent } from './news-manager/news-manager.component';
     import { UserManagerComponent } from './user-manager/user-manager.component';
@@ -23,7 +24,19 @@
 
 
     @NgModule({
-    declarations: [NewsManagerComponent, UserManagerComponent, DashBoardComponent, AddUserComponent, EditUserComponent, NewsDetailComponent, AddNewsComponent, CatalogManagerComponent, CatalogDetailComponent, CatalogAddComponent],
+    declarations: [
+        NewsManagerComponent,
+        UserManagerComponent, 
+        DashBoardComponent, 
+        AddUserComponent, 
+        EditUserComponent, 
+        NewsDetailComponent, 
+        AddNewsComponent, 
+        CatalogManagerComponent, 
+        CatalogDetailComponent, 
+        CatalogAddComponent,
+        FileSelectDirective,
+    ],
     imports: [
         CommonModule,
         ReactiveFormsModule,
@@ -31,6 +44,7 @@
         MatDialogModule,
         OverlayModule,
         HttpClientModule,
+        FormsModule,
         RouterModule.forChild([
             {   path: 'admin/dashboard', 
                 component: DashBoardComponent,

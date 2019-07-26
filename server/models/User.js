@@ -4,7 +4,7 @@ var db = require('../Database/Dbconnection');
 var Users = {
 
     createTable: function() {
-        db.query("SELECT COUNT(*) AS amount FROM information_schema.TABLES WHERE (TABLE_SCHEMA = 'demo2') AND (TABLE_NAME = 'Users')", function(err, res) {
+        db.query("SELECT COUNT(*) AS amount FROM information_schema.TABLES WHERE (TABLE_SCHEMA = 'demo3') AND (TABLE_NAME = 'Users')", function(err, res) {
             if (err) {
                 throw err;
             }
@@ -28,6 +28,10 @@ var Users = {
 
     getUsers: function(page, callback) {
         return db.query("SELECT id, userName, role, email, fullName, gender FROM Users LIMIT ?, 50", [page - 1], callback);
+    },
+
+    getAuthor: function(callback) {
+        return db.query("SELECT id, userName, role, email, fullName, gender FROM Users WHERE   role = 'Author'", callback)
     },
 
     getUserByUserName: function(userName, callback) {
