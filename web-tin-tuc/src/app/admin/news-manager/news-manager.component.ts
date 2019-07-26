@@ -79,16 +79,11 @@ import { HttpEventType } from '@angular/common/http';
             dialogConfig.width = '1000px';
 
             const dialogRef = this.dialog.open(AddNewsComponent, dialogConfig);
-            dialogRef.afterClosed().subscribe(result => {
-                if(result){
-                    this.adminService.addNews(result).subscribe(data => {
-                        
-                        this.currentPage = 1;
-                        this.adminService.getListNews(this.currentPage).subscribe(list=>{
-                            this.listNews = list;
-                        })
-                    })
-                }
+            dialogRef.afterClosed().subscribe(result => {     
+                this.currentPage = 1;
+                this.adminService.getListNews(this.currentPage).subscribe(list=>{
+                this.listNews = list;
+                })
             })
         }
 

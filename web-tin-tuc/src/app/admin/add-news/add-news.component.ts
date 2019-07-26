@@ -7,7 +7,7 @@
 
     import {  FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
 
-const URL = 'http://localhost:3000/admin/imgs/upload/';
+const URL = 'http://localhost:3000/imgs/upload/';
 
 
     @Component({
@@ -84,9 +84,9 @@ const URL = 'http://localhost:3000/admin/imgs/upload/';
                 this.uploader.uploadAll();
             })
 
-            if(!this.uploader.getNotUploadedItems().length){
-                  this.matdialogRef.close(this.addForm.value);
-            }
+           
+            this.matdialogRef.close();
+            
 
         }
 

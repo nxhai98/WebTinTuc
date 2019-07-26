@@ -32,6 +32,9 @@ var Catalogs = {
     getChildCatalog: function(id, callback) {
         return db.query("SELECT * FROM Catalogs WHERE parentId = ?", id, callback);
     },
+    getRootCatalog: function(callback) {
+        return db.query("SELECT * FROM Catalogs WHERE parentId IS NULL", callback);
+    },
 
     addCatalog: function(catalog, callback) {
         return db.query("INSERT INTO Catalogs(name, description, parentId) VALUE(?, ?, ?)", [catalog.name, catalog.description, catalog.parentId], callback);

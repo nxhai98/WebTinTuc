@@ -1,0 +1,12 @@
+<div class="card">
+    <img [src]="imgUrl + news.id" class="card-img-top">
+    <div class="card-body">
+        <h2 class="card-title">{{news.title}}</h2>
+        <p class="card-text">{{news.description}}</p>
+        <h6 class="card-subtitle mt-2 text-muted">{{news.createAt|date:'medium'}}</h6>
+        <p class="card-text">{{news.content}}</p>
+        <div>
+            <!-- comment -->
+        </div>
+    </div>
+</div>

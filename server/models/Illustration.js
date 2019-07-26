@@ -33,8 +33,8 @@ var Illustration = {
         return db.query("INSERT INTO Illustrations(img, newsId, content) VALUE(?, ?, ?)", [img.img, img.newsId, img.content], callback);
     },
 
-    updateImg(id, img, callback) {
-        return db.query("UPDATE Illustrations SET img = ?, content = ? WHERE id = ?", [img.img, img.content, id], callback);
+    updateImg(newsId, img, callback) {
+        return db.query("UPDATE Illustrations SET img = ?, content = ? WHERE newsId = ?", [img.img, img.content, newsId], callback);
     },
 
     remoteImg: function(newId, callback) {

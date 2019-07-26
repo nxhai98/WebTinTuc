@@ -16,6 +16,15 @@ route.get('/catalogs/', function(req, res, next) {
 
 });
 
+route.get('/catalogs/root/', function(req, res) {
+    Catalogs.getRootCatalog(function(err, list) {
+        if (err) {
+            throw err;
+        }
+        res.json(list);
+    })
+})
+
 route.get('/catalogs/:id?', function(req, res, next) {
     res.json();
 })

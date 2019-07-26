@@ -19,15 +19,6 @@
         ngOnInit() {
         }
 
-        test(){
-            let user = {
-                name:'asda'
-            }
-            this.admin.addIllus('asdddd').subscribe(data=>{
-                console.log(data);
-                
-            })
-        }
 
         accManageChoise(){
             this.isCatalogManagerClick = false;

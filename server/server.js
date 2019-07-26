@@ -37,7 +37,8 @@ app.use(cors({
 app.use('/', require('./controller/user-controler'));
 app.use('/admin/', require('./controller/catalog-controller'));
 app.use('/news/', require('./controller/news-controller'));
-app.use('/admin/imgs/', require('./controller/img-controller'));
+app.use('/imgs/', require('./controller/img-controller'));
+app.use('/comment/', require('./controller/comment-controller'));
 app.use(errorHandle);
 
 app.listen(3000, function() {

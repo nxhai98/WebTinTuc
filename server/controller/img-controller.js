@@ -10,32 +10,20 @@ const path = require('path');
 var fs = require('fs');
 
 module.exports = route;
-const DIR = './uploads';
 
-let storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, DIR);
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now() + '.' + path.extname(file.originalname));
-    }
-});
-let upload = multer({ storage: storage });
-
-
-route.get('/:id?', function(req, res) {
+route.get('/:id?', function(req, res, next) {
 
     Illustration.getImgByNewId(req.params.id, function(err, result) {
         if (err) {
             throw err;
         }
-        console.log(result);
 
         if (result != '') {
             res.setHeader('content-type', 'image/png');
-            res.send(result[0].img);
+            res.end(result[0].img);
+
         }
-        res.send(404);
+        res.end('Not Found');
 
     })
 
@@ -65,11 +53,28 @@ route.post('/upload/:newsId?', function(req, res, next) {
 
 });
 
-route.delete('/:newsId?', authorize(roles.admin), function(req, res) {
-    Illustration.remoteImg(req.params.newsId, function(err, count) {
-        if (err) {
-            throw err;
+// route.delete('/:newsId?', authorize(roles.admin), function(req, res) {
+//     Illustration.remoteImg(req.params.newsId, function(err, count) {
+//         if (err) {
+//             throw err;
+//         }
+//         res.json(count);
+//     })
+// })
+route.put('/:newsId?', authorize(roles.admin), function(req, res) {
+
+    var form = new formidable.IncomingForm();
+    form.parse(req, function(err, fields, files) {
+        var img = {
+            img: fs.readFileSync(files.photo.path),
+            newsId: req.params.newsId,
+            content: 'asddd'
         }
-        res.json(count);
+        Illustration.updateImg(req.params.newsId, img, function(err, count) {
+            fs.unlinkSync(files.photo.path);
+
+            res.json('OK');
+        })
     })
+
 })

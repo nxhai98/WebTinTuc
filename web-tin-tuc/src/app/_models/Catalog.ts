@@ -4,3 +4,8 @@ export class Catalog{
     description:string;
     parentId?: number;
 }
+
+export class CatalogFamily{
+    catalog: Catalog;
+    child: Catalog[];
+}

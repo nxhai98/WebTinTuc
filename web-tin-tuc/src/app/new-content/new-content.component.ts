@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+    import { Component, OnInit , Input} from '@angular/core';
 
-@Component({
-  selector: 'app-new-content',
-  templateUrl: './new-content.component.html',
-  styleUrls: ['./new-content.component.css']
-})
-export class NewContentComponent implements OnInit {
+    @Component({
+        selector: 'app-new-content',
+        templateUrl: './new-content.component.html',
+        styleUrls: ['./new-content.component.css']
+    })
+    export class NewContentComponent implements OnInit {
 
-  constructor() { }
+        constructor(
+        ) { }
+        
+        imgUrl = 'http://localhost:3000/imgs/'
 
-  ngOnInit() {
-  }
+        @Input() news;
+        ngOnInit() {}
 
-}
+    }

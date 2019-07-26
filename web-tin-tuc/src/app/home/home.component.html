@@ -1,19 +1,19 @@
 <section class="container" style="margin-top: 70px;">
     <section class="row" style="width: 100%;">
-
-        <section class="col-9">
+        <app-new-content [news]="selectedNews" *ngIf="isnewsSelected" class="col-9"></app-new-content>
+        <section class="col-9" *ngIf="!isnewsSelected">
             <div id="list-paging">
-                <div class="container" *ngFor="let item of [1, 2, 3, 4]">
+                <div class="container" *ngFor="let news of listNews">
                     <div class="card flex-row flex-wrap">
                         <div class="row no-gutters">
                             <div class="col-auto">
-                                <img style="top: auto; bottom: auto; margin: 12px" src="https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" width=180px height=auto>
+                                <img style="top: auto; bottom: auto; margin: 12px" [src]="imgUrl + news.id" width=180px height=auto>
                             </div>
                             <div class="col">
                                 <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <h6 class="card-subtitle mt-2 text-muted">dateTime/author</h6>
+                                    <h5 class="card-title" style="cursor: pointer" (click)="onSelect(news.id)">{{news.title}}</h5>
+                                    <p class="card-text">{{news.description}}</p>
+                                    <h6 class="card-subtitle mt-2 text-muted">{{news.createAt|date:'medium'}}</h6>
                                 </div>
                             </div>
                         </div>
@@ -23,12 +23,15 @@
             </div>
         </section>
 
-        <section class="col-3">
+        <section class="col-3 float-right">
             <div id="catalog-container">
                 <div class="sidenav col-2">
-                    <ul class="list-group ">
-                        <li class="list-group-item" *ngFor="let item of ['catalog1', 'catalog2', 'catalog3']">
-                            <a class="" href="# ">{{item}}</a>
+                    <ul class="list-group">
+                        <li class="list-group-item row" *ngFor="let catalog of listRootCatalog">
+                            <div class="col-sm-10 ">
+                                <a class="card-link" style="cursor: pointer">{{catalog.catalog.name}}</a>
+                            </div>
+                            <div class="col-sm-2"></div>
                         </li>
                     </ul>
                 </div>

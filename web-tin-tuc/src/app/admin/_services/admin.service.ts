@@ -113,6 +113,14 @@
                 catchError(this.handleError)
             );
         }
+
+        getListRootCatalog(){
+            return this.http.get(this.url + 'catalogs/root/', this.httpOptions).pipe(
+                tap(),
+                catchError(this.handleError)
+            );
+        }
+        
         
         addCatalog(catalog){
             return this.http.post(this.url + 'catalogs/', catalog, this.httpOptions).pipe(
@@ -144,34 +152,33 @@
         }
 
 
-        addIllus(data){
-            console.log(data[0]);
+        // addIllus(data){
+        //     console.log(data[0]);
 
-            const formData = new FormData();
+        //     const formData = new FormData();
             
-            let httpOptions = {
-                headers: new HttpHeaders({'Authorization': 'Bearer ' + this.currentUser.token, 'Access-Control-Allow-Origin' : "*" }),
-                reportProgress: true,
-              };
-            return this.http.post('http://localhost:3000/admin/imgs/upload/', formData, httpOptions).pipe(
-                tap(),
-                catchError(this.handleError)
-            )
+        //     let httpOptions = {
+        //         headers: new HttpHeaders({'Authorization': 'Bearer ' + this.currentUser.token, 'Access-Control-Allow-Origin' : "*" }),
+        //         reportProgress: true,
+        //       };
+        //     return this.http.post('http://localhost:3000/admin/imgs/upload/', formData, httpOptions).pipe(
+        //         tap(),
+        //         catchError(this.handleError)
+        //     )
+        // }
+
+
+        private handleError(error: HttpErrorResponse) {
+            if (error.error instanceof ErrorEvent) {
+            // A client-side or network error occurred. Handle it accordingly.
+            console.error("An error occurred:", error.error.message);
+            } else {
+            // The backend returned an unsuccessful response code. The response body may contain clues as to what went wrong,
+            console.error(
+                `Backend returned code ${error.status}, ` + `body was: ${error.error}`
+            );
+            }
+            // return an observable with a user-facing error message
+            return throwError(error);
         }
-
-
-    private handleError(error: HttpErrorResponse) {
-        if (error.error instanceof ErrorEvent) {
-        // A client-side or network error occurred. Handle it accordingly.
-        console.error("An error occurred:", error.error.message);
-        } else {
-        // The backend returned an unsuccessful response code. The response body may contain clues as to what went wrong,
-        console.error(
-            `Backend returned code ${error.status}, ` + `body was: ${error.error}`
-        );
-        }
-        // return an observable with a user-facing error message
-        return throwError(error);
-    }
-
     }

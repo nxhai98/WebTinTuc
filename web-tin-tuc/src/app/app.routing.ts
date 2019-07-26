@@ -5,6 +5,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { DashBoardComponent } from './admin/dash-board/dash-board.component';
 import { Role } from './_models/Role';
 import { LoginComponent } from './login/login.component';
+import { NewContentComponent } from './new-content/new-content.component';
 
 const appRouter: Routes = [
     {

@@ -20,7 +20,7 @@
         ) { }
 
         ngOnInit() {
-            this.adminSevice.getListCatalog().subscribe(data =>{
+            this.adminSevice.getListRootCatalog().subscribe(data =>{
                 this.listCatalog = data;
             });
             this.addForm = this.formBuilder.group({
