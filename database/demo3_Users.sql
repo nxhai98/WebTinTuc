@@ -31,7 +31,7 @@ CREATE TABLE `Users` (
   `fullName` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `gender` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (2,'nxhai','123456','User','nxhai98@gmail.com','Nguyễn Xuân Hải','male'),(3,'NamCao','111111','Author','a@b','Nam Cao','male'),(4,'admin','admin','Admin','s@admin','AAS','male');
+INSERT INTO `Users` VALUES (2,'nxhai','123456','User','nxhai98@gmail.com','Nguyễn Xuân Hải','male'),(3,'NamCao','111111','Author','a@b','Nam Cao','male'),(4,'admin','admin','Admin','s@admin','AAS','male'),(5,'user','111111','User','a@as','asda','female');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-26 19:49:12
+-- Dump completed on 2019-07-29 17:20:56

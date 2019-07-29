@@ -30,7 +30,7 @@ CREATE TABLE `Catalogs` (
   PRIMARY KEY (`id`),
   KEY `parentId` (`parentId`),
   CONSTRAINT `Catalogs_ibfk_1` FOREIGN KEY (`parentId`) REFERENCES `Catalogs` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `Catalogs` (
 
 LOCK TABLES `Catalogs` WRITE;
 /*!40000 ALTER TABLE `Catalogs` DISABLE KEYS */;
-INSERT INTO `Catalogs` VALUES (1,'Pháp luật','pháp luật',NULL),(2,'Thể Thao','thể thao',NULL),(3,'Đời Sống','doi song',NULL);
+INSERT INTO `Catalogs` VALUES (1,'Pháp luật','pháp luật',NULL),(2,'Thể Thao','thể thao',NULL),(4,'asd','asd',1);
 /*!40000 ALTER TABLE `Catalogs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-26 19:49:12
+-- Dump completed on 2019-07-29 17:20:55

@@ -34,7 +34,7 @@ CREATE TABLE `News` (
   PRIMARY KEY (`id`),
   KEY `catalogId` (`catalogId`),
   CONSTRAINT `News_ibfk_1` FOREIGN KEY (`catalogId`) REFERENCES `Catalogs` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `News` (
 
 LOCK TABLES `News` WRITE;
 /*!40000 ALTER TABLE `News` DISABLE KEYS */;
-INSERT INTO `News` VALUES (71,'sda',1,'asd',3,'2019-07-26 13:56:40',NULL,'asd'),(73,'asd',1,'asd',3,'2019-07-26 14:18:17',NULL,'asd'),(74,'asd',1,'asd',3,'2019-07-26 16:56:11',NULL,'asd'),(75,'assssssdasd',1,'asdasdasd',3,'2019-07-26 19:46:27',NULL,'asdasdasd');
+INSERT INTO `News` VALUES (74,'asd',1,'asd',3,'2019-07-26 16:56:11',NULL,'asd'),(75,'assssssdasd',1,'asdasdasd',3,'2019-07-26 19:46:27',NULL,'asdasdasd'),(76,'saddfasdas',1,'sad',3,'2019-07-29 13:50:10',NULL,'asd'),(77,'asd',1,'asd',3,'2019-07-29 14:03:54',NULL,'as'),(78,'asd',1,'ads',3,'2019-07-29 14:04:35',NULL,'asd'),(79,'asd',1,'asd',3,'2019-07-29 14:07:46',NULL,'asd'),(80,'adqw',2,'qwe',3,'2019-07-29 14:08:22',NULL,'qw');
 /*!40000 ALTER TABLE `News` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-26 19:49:12
+-- Dump completed on 2019-07-29 17:20:55
