@@ -1,11 +1,10 @@
-import {HttpClientModule} from '@angular/common/http';
-import {RouterModule, Routes, Router} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './_guards/auth.guard';
-import { DashBoardComponent } from './admin/dash-board/dash-board.component';
 import { Role } from './_models/Role';
 import { LoginComponent } from './login/login.component';
 import { NewContentComponent } from './new-content/new-content.component';
+import { ListNewsViaCatalogComponent } from './list-news-via-catalog/list-news-via-catalog.component';
 
 const appRouter: Routes = [
     {
@@ -17,12 +16,22 @@ const appRouter: Routes = [
         path: 'admin',
         loadChildren: () => import('./admin/admin.module').then(add => add.AdminModule),
         canActivate: [AuthGuard],
-        data: {roles: [Role.admin]}
+        data: {roles: [Role.admin]},
+        //outlet: 'root',
     },
     {
         path: 'login',
         component: LoginComponent,
     },
+    {
+        path: 'news/:id/content',
+        component: NewContentComponent,
+    },
+    {
+        path: 'news/catalog/:catalogId',
+        component: ListNewsViaCatalogComponent,
+    }
+    ,
     {
         path: '**',
         redirectTo: ''

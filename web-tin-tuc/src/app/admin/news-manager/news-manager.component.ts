@@ -16,6 +16,8 @@ import { HttpEventType } from '@angular/common/http';
 
         listNews;
         currentPage = 1;
+        pageDisplay: number[] = [];
+        pageCount;
         constructor(
             private adminService: AdminService,
             private dialog: MatDialog,
@@ -25,6 +27,12 @@ import { HttpEventType } from '@angular/common/http';
             this.adminService.getListNews(this.currentPage).subscribe(list=>{
                 this.listNews = list;
             });
+            this.adminService.getPageCount().subscribe(count =>{
+                this.pageCount = count;
+                for(let i = 1; i <= this.pageCount; i++){
+                    this.pageDisplay.push(i);
+                }
+            })
         }
 
         onDelete(news){
@@ -62,9 +70,7 @@ import { HttpEventType } from '@angular/common/http';
                         result.illustration = formData;
 
                         this.adminService.updateNews(data[0].id, result).subscribe(res =>{
-                            this.adminService.getListNews(this.currentPage).subscribe(list => {
-                                this.listNews = list;
-                            })
+                           this.onReset();
                         })
                     }
                 })
@@ -80,10 +86,27 @@ import { HttpEventType } from '@angular/common/http';
 
             const dialogRef = this.dialog.open(AddNewsComponent, dialogConfig);
             dialogRef.afterClosed().subscribe(result => {     
-                this.currentPage = 1;
-                this.adminService.getListNews(this.currentPage).subscribe(list=>{
+                this.onReset();
+            })
+        }
+
+        loadPage(page){
+            this.currentPage = page;
+            this.adminService.getListNews(page).subscribe(list => {
                 this.listNews = list;
-                })
+            })
+        };
+
+        onReset(){
+            this.adminService.getListNews(this.currentPage).subscribe(list=>{
+                this.listNews = list;
+            });
+            this.pageDisplay = [];
+            this.adminService.getPageCount().subscribe(count =>{
+                this.pageCount = count;
+                for(let i = 1; i <= this.pageCount; i++){
+                    this.pageDisplay.push(i);
+                }
             })
         }
 

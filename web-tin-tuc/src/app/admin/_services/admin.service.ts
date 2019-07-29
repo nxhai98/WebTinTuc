@@ -85,6 +85,14 @@
             )
         }
 
+        getPageCount(){
+            return this.http.get<number>(this.urlForNews + 'news/page/').pipe(
+                tap(),
+                catchError(this.handleError)
+            );
+        }
+
+
         addNews(news){
             return this.http.post(this.urlForNews + 'news/', news, this.httpOptions).pipe(
                 tap(),

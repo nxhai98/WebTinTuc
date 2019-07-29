@@ -4,6 +4,7 @@
     import {catchError, tap, map} from 'rxjs/operators'; 
     import {AuthenticationService} from './authentication.service';
 import { Catalog } from '../_models/Catalog';
+import { News } from '../_models/News';
 
 
     @Injectable({
@@ -18,15 +19,36 @@ import { Catalog } from '../_models/Catalog';
         url = 'http://127.0.0.1:3000/';
         
 
-        getNewsByPage(page: number){
+        getNewsByPage(page){
             return this.http.get(this.url + 'news/page/' + page).pipe(
                 tap(),
                 catchError(this.handleError)
             );
         }
 
+        getNewsByCatalog(page, catalogId){
+            return this.http.get(this.url + 'news/catalog/' + catalogId + '/page/' + page).pipe(
+                tap(),
+                catchError(this.handleError)
+            )
+        }
+
+        getNewCountByCatalog(catalogId){
+            return this.http.get<number>(this.url + 'news/catalog/' + catalogId + '/page').pipe(
+                tap(),
+                catchError(this.handleError)
+            )
+        }
+
+        getMaxPage(){
+            return this.http.get<number>(this.url + 'news/page/').pipe(
+                tap(),
+                catchError(this.handleError)
+            );
+        }
+
         getNewsById(id: number){
-            return this.http.get(this.url + 'news/id/' + id).pipe(
+            return this.http.get<News>(this.url + 'news/id/' + id).pipe(
                 tap(),
                 catchError(this.handleError)
             )

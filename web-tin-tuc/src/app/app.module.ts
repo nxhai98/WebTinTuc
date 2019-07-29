@@ -11,13 +11,15 @@ import { LoginComponent } from './login/login.component';
 import {routing} from './app.routing';
 import { NewContentComponent } from './new-content/new-content.component';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { ListNewsViaCatalogComponent } from './list-news-via-catalog/list-news-via-catalog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    NewContentComponent
+    NewContentComponent,
+    ListNewsViaCatalogComponent
   ],
   imports: [
     BrowserModule,

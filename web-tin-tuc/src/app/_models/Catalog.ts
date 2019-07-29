@@ -8,4 +8,5 @@ export class Catalog{
 export class CatalogFamily{
     catalog: Catalog;
     child: Catalog[];
+    displayChild: boolean;
 }

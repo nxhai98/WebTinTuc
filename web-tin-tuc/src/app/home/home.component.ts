@@ -13,36 +13,37 @@ import { templateJitUrl } from '@angular/compiler';
         newUrl = 'http://localhost:3000/news/id/'
         currentPage = 1;
         listNews;
-        listCatalog: Catalog[];
-        listRootCatalog: CatalogFamily[] = [];
-        isnewsSelected = false;
         selectedNews;
+        pageCount: number;
+        pageDisplay: number[] = [];
         constructor(
             private userService: UserService,
-        ) { 
-            this.userService.getListCatalog().subscribe(catalogs =>{
-                this.listCatalog = catalogs;
-                catalogs.forEach(item =>{
-                    if(item.parentId == null){
-                        this.listRootCatalog.push({catalog: item, child: []});
-                    }
-
-                })
-            });
-        }
+        ) {}
 
         ngOnInit() {
             this.userService.getNewsByPage(this.currentPage).subscribe(list=>{
                 this.listNews = list;
+            });
+            this.userService.getMaxPage().subscribe(pageCount =>{
+                this.pageCount = pageCount;
+                for(let i = 1; i<= pageCount; i++){
+                    this.pageDisplay.push(i);
+                }
+            });
+        }
+
+        displayClildCatalog(id){
+            this.listRootCatalog.forEach(root =>{
+                if(root.catalog.id == id){
+                    root.displayChild = true;
+                }
             })
         }
 
-        onSelect(newsId){
-            this.userService.getNewsById(newsId).subscribe(data =>{
-                console.log(data);
-                
-                this.selectedNews = data[0];
-                this.isnewsSelected = true;
+        loadPage(page){
+            this.currentPage = page;
+            this.userService.getNewsByPage(page).subscribe(data => {
+                this.listNews = data;
             })
         }
 

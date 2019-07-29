@@ -27,7 +27,19 @@ var News = {
 
 
     getNews: function(page, callback) {
-        return db.query("SELECT id, title, description, catalogId, author, createAt, updateAt FROM News LIMIT ?, 50", [page - 1], callback);
+        return db.query("SELECT id, title, description, catalogId, author, createAt, updateAt FROM News LIMIT ?, 2", [(page - 1) * 2], callback);
+    },
+
+    getNewByCatalog(id, page, callback) {
+        return db.query("SELECT id, title, description, catalogId, author, createAt, updateAt FROM News WHERE catalogId = ? LIMIT ?, 2", [id, (page - 1) * 2], callback);
+    },
+
+    getNewCountByCatalog(catalogId, callback) {
+        return db.query("SELECT COUNT(*) AS Sum FROM News WHERE catalogId = ?", catalogId, callback);
+    },
+
+    getNumberOfNews: function(callback) {
+        return db.query("SELECT COUNT(*) AS Sum FROM News", callback);
     },
 
     getById: function(id, callback) {

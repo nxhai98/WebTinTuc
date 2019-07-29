@@ -9,12 +9,41 @@ const authorize = require('../_helpers/authorize');
 module.exports = route;
 
 route.get('/page/:page?', function(req, res, next) {
-    News.getNews(req.params.page, function(err, news) {
-        if (err) {
-            throw err;
-        }
-        res.json(news);
-    })
+    if (req.params.page) {
+        News.getNews(req.params.page, function(err, news) {
+            if (err) {
+                throw err;
+            }
+            res.json(news);
+        })
+    } else {
+        News.getNumberOfNews(function(err, num) {
+            if (err) {
+                throw err;
+            }
+            res.json(Math.ceil(num[0].Sum / 2));
+        })
+    }
+
+});
+
+route.get('/catalog/:id?/page/:page?', function(req, res) {
+    if (req.params.id && req.params.page) {
+        News.getNewByCatalog(req.params.id, req.params.page, function(err, list) {
+            if (err) {
+                throw err;
+            }
+            res.json(list);
+        })
+    } else if (req.params.id) {
+        News.getNewCountByCatalog(req.params.id, function(err, count) {
+            if (err) {
+                throw err;
+            }
+            res.json(Math.ceil(count[0].Sum / 2))
+        })
+    }
+
 });
 
 route.get('/id/:id?', function(req, res, next) {
