@@ -23,12 +23,12 @@
 
         ngOnInit() {
             this.route.params.subscribe(params => {
+                console.log(params.catalogId)
                 this.userService.getNewsByCatalog(this.currentPage,params.catalogId).subscribe(list=>{
                     this.listNews = list;
                 });
                 this.userService.getNewCountByCatalog(params.catalogId).subscribe(pageCount =>{
                     if(pageCount == 0){
-                        this.currentPage = 0;
                     }
                     this.pageCount = pageCount;
                     this.pageDisplay = [];
